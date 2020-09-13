@@ -1,0 +1,20 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: aplicacao-deployment
+spec:
+  selector:
+    matchLabels:
+      name: aplicacao-pod
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: aplicacao-pod
+    spec:
+      containers:
+        - image: php:5.6-apache
+          name: container-aplicacao
+          ports:
+            - containerPort: 80
